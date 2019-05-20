@@ -30,13 +30,13 @@ class ContainerViewController: UIViewController, FoodViewControllerDelegate {
     }
     
     func configureMenuViewController() {
-        //if menuViewController == nil {
+        if menuViewController == nil {
             menuViewController = MenuViewController()
             addChild(menuViewController)
             view.insertSubview(menuViewController.view, at: 0)
             menuViewController.didMove(toParent: self)
             print("Добавили menuViewController")
-        //}
+        }
     }
     
     func showMenuViewController(shouldMove: Bool) {
@@ -62,12 +62,7 @@ class ContainerViewController: UIViewController, FoodViewControllerDelegate {
                            animations: {
                             self.foodViewController.view.frame.origin.x = 0
             }) { (finished) in
-    
-//                self.menuViewController.willMove(toParent: nil)
-//                self.menuViewController.view.removeFromSuperview()
-//                self.menuViewController.removeFromParent()
-                self.menuViewController.remove()
-                print("Удалили menuViewController")
+
             }
         }
     }
@@ -76,26 +71,9 @@ class ContainerViewController: UIViewController, FoodViewControllerDelegate {
     
     func toggleMenu() {
         
-        if !isMove {
-            configureMenuViewController()
-        }
+        configureMenuViewController()
         isMove = !isMove
         showMenuViewController(shouldMove: isMove)
     }
     
-}
-
-
-extension UIViewController {
-    func add(_ child: UIViewController) {
-        addChild(child)
-        view.addSubview(child.view)
-        child.didMove(toParent: self)
-    }
-    
-    func remove() {
-        willMove(toParent: nil)
-        view.removeFromSuperview()
-        removeFromParent()
-    }
 }
